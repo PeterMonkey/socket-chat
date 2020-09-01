@@ -8,14 +8,18 @@ io.on('connection', (client) => {
 
     client.on('entrarChat', (data, callback) => {
 
-        if( !data.nombre ){
+        console.log(data)
+
+        if( !data.nombre || !data.sala){
             return callback({
                 error: true,
-                mensaje: 'El nombre es necesario'
+                mensaje: 'El nombre/sala es necesario'
             })
         }
 
-        let personas = usuarios.agregarPersona( client.id, data.nombre )
+        client.join(data.sala)
+
+        let personas = usuarios.agregarPersona( client.id, data.nombre, data.sala )
 
         client.broadcast.emit('listaPersona', usuarios.getPersonas())
 
@@ -35,6 +39,8 @@ io.on('connection', (client) => {
     
     client.on('disconnect', () => {
         let personaBorrada = usuarios.borrarPersona( client.id )
+        // console.log(personaBorrada)
+        // console.log(crearMensaje(personaBorrada))
 
         client.broadcast.emit('crearMensaje', crearMensaje('Administrador', `${personaBorrada.nombre} salió`))
         client.broadcast.emit('listaPersona', usuarios.getPersonas())
