@@ -30,12 +30,12 @@ socket.on('disconnect', function() {
 
 
 // Enviar información
-socket.emit('enviarMensaje', {
-    usuario: 'Pedro',
-    mensaje: 'Hola Mundo'
-}, function(resp) {
-    console.log('respuesta server: ', resp);
-});
+// socket.emit('crearMensaje', {
+//     usuario: 'Pedro',
+//     mensaje: 'Hola Mundo'
+// }, function(resp) {
+//     console.log('respuesta server: ', resp);
+// });
 
 // Escuchar información
 socket.on('crearMensaje', function(mensaje) {
@@ -51,3 +51,10 @@ socket.on('listaPersona', function(personas) {
     console.log(personas);
 
 });
+
+// mensajes privados
+socket.on('mensajePrivado', function(mensaje){
+
+    console.log('Mensaje privado:', mensaje)
+
+})
