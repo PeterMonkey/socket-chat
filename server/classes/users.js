@@ -1,15 +1,12 @@
 class Users {
 
-    cosntructor() {
+    constructor() {
         this.personas = [];
     }
 
-    agregarPersona(is, nombre){
+    agregarPersona(id, nombre){
 
-        let persona = {
-            id,
-            persona
-        }
+        let persona = { id, nombre }
 
         this.personas.push(persona);
         return this.personas;
@@ -34,7 +31,7 @@ class Users {
 
     borrarPersona(id){
 
-        let personaBorrada = getPersona(id)
+        let personaBorrada = this.getPersona(id)
 
         this.personas = this.personas.filter( persona => {
             return persona.id != id
